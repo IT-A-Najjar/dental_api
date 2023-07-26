@@ -19,7 +19,7 @@ class Pateints extends Model
     public function User(){
         return $this->belongsTo(User::class);
     }
-    public function Illness(){
-        return $this->belongsTo(Illnesse::class);
+    public function States(){
+        return $this->hasMany(state::class);
     }
 }

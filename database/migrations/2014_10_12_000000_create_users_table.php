@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('phone_number');
             $table->string('university');
             $table->string('photo');
+            $table->integer('privilege');
             $table->rememberToken();
             $table->timestamps();
         });

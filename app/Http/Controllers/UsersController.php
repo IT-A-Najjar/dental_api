@@ -48,6 +48,7 @@ class UsersController extends Controller
                 'phone_number' => $request->phone_number,
                 'university' => $request->university,
                 'photo' => $request->photo,
+                'privilege'=>$request->privilege,
             ]);
 
             return response()->json([
@@ -116,6 +117,7 @@ class UsersController extends Controller
             $user->phone_number = $request->phone_number;
             $user->university = $request->university;
             $user->photo = $request->photo;
+            $user->privilege = $request->privilege;
             $user->save();
             return response()->json([
                 'message' => "user successfully updated."

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comments;
+use App\Models\state;
 use Illuminate\Http\Request;
 
-class CommentController extends Controller
+class StatesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $comments = Comments::all();
+        $states = state::all();
         return response()->json([
-            'Comments' => $comments,
+            'states' => $states,
         ], 200);
     }
 
@@ -39,19 +39,22 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         try {
-            Comments::create([
-                'content' => $request->content,
-                 'consultation_id' => $request->consultation_id,
+            state::create([
+                'state_name' => $request->state_name,
+                'description' => $request->description,
+                'time' => $request->time,
+                'place' => $request->place,
+                'pateint_id' => $request->pateint_id,
+                'illness_id' => $request->illness_id,
             ]);
 
             return response()->json([
-                'messages' => "Comment successfully created."
+                'messages' => "states successfully created."
             ], 200);
             // return $request;
         } catch (\Exception $e) {
             return response()->json([
                 'message' => "something went really wrong!"
-                // 'message' => $request
             ], 500);
         }
     }
@@ -64,15 +67,15 @@ class CommentController extends Controller
      */
     public function show($id)
     {
-        $comment = Comments::find($id);
-        if(!$comment){
+        $states = state::find($id);
+        if (!$states) {
             return response()->json([
-                'message' => 'comment not found'
+                'message' => 'states not found'
             ], 404);
         }
         return response()->json([
-            'comment' => $comment
-        ],200);
+            'states' => $states
+        ], 200);
     }
 
     /**
@@ -81,9 +84,9 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request,$id)
+    public function edit($id)
     {
-       
+        //
     }
 
     /**
@@ -96,18 +99,22 @@ class CommentController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $comment = Comments::find($id);
-            if (!$comment) {
+            $states = state::find($id);
+            if (!$states) {
                 return response()->json([
-                    'message' => 'comment not found.'
+                    'message' => 'states not found.'
                 ], 404);
             }
             // echo "request: $request->name";
-            $comment->content = $request->content;
-            $comment->consultation_id = $request->consultation_id;
-            $comment->save();
+            $states->state_name = $request->state_name;
+            $states->description = $request->description;
+            $states->time = $request->time;
+            $states->place = $request->place;
+            $states->pateint_id = $request->pateint_id;
+            $states->illness_id = $request->illness_id;
+            $states->save();
             return response()->json([
-                'message' => "comment successfully updated."
+                'message' => "states successfully updated."
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
@@ -124,15 +131,15 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        $comment = Comments::find($id);
-        if (!$comment) {
+        $states = state::find($id);
+        if (!$states) {
             return response()->json([
-                'message' => 'comment not found.'
+                'message' => 'states not found.'
             ], 404);
         }
-        $comment->delete();
+        $states->delete();
         return response()->json([
-            'message' => "comment succssfully deleted."
+            'message' => "states succssfully deleted."
         ], 200);
     }
 }

@@ -44,7 +44,6 @@ class PateintsController extends Controller
                 'age' => $request->age,
                 'phone_number' => $request->phone_number,
                 'user_id' => $request->user_id,
-                'illness_id' => $request->illness_id,
             ]);
 
             return response()->json([
@@ -109,7 +108,6 @@ class PateintsController extends Controller
             $pateints->age = $request->age;
             $pateints->phone_number = $request->phone_number;
             $pateints->user_id = $request->user_id;
-            $pateints->illness_id = $request->illness_id;
             $pateints->save();
             return response()->json([
                 'message' => "pateints successfully updated."

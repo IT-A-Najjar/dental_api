@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comments;
+use App\Models\Event;
 use Illuminate\Http\Request;
 
-class CommentController extends Controller
+class EventsController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $comments = Comments::all();
+        $Events = Event::all();
         return response()->json([
-            'Comments' => $comments,
+            'Events' => $Events,
         ], 200);
     }
 
@@ -39,19 +39,18 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         try {
-            Comments::create([
-                'content' => $request->content,
-                 'consultation_id' => $request->consultation_id,
+            Event::create([
+                'event' => $request->event,
+                'user_id' => $request->user_id,
             ]);
 
             return response()->json([
-                'messages' => "Comment successfully created."
+                'messages' => "Events successfully created."
             ], 200);
             // return $request;
         } catch (\Exception $e) {
             return response()->json([
                 'message' => "something went really wrong!"
-                // 'message' => $request
             ], 500);
         }
     }
@@ -64,15 +63,15 @@ class CommentController extends Controller
      */
     public function show($id)
     {
-        $comment = Comments::find($id);
-        if(!$comment){
+        $Events = Event::find($id);
+        if (!$Events) {
             return response()->json([
-                'message' => 'comment not found'
+                'message' => 'Events not found'
             ], 404);
         }
         return response()->json([
-            'comment' => $comment
-        ],200);
+            'Events' => $Events
+        ], 200);
     }
 
     /**
@@ -81,9 +80,9 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request,$id)
+    public function edit($id)
     {
-       
+        //
     }
 
     /**
@@ -96,18 +95,18 @@ class CommentController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $comment = Comments::find($id);
-            if (!$comment) {
+            $Events = Event::find($id);
+            if (!$Events) {
                 return response()->json([
-                    'message' => 'comment not found.'
+                    'message' => 'Events not found.'
                 ], 404);
             }
             // echo "request: $request->name";
-            $comment->content = $request->content;
-            $comment->consultation_id = $request->consultation_id;
-            $comment->save();
+            $Events->event = $request->event;
+            $Events->user_id = $request->user_id;
+            $Events->save();
             return response()->json([
-                'message' => "comment successfully updated."
+                'message' => "Events successfully updated."
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
@@ -124,15 +123,15 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        $comment = Comments::find($id);
-        if (!$comment) {
+        $Events = Event::find($id);
+        if (!$Events) {
             return response()->json([
-                'message' => 'comment not found.'
+                'message' => 'Events not found.'
             ], 404);
         }
-        $comment->delete();
+        $Events->delete();
         return response()->json([
-            'message' => "comment succssfully deleted."
+            'message' => "Events succssfully deleted."
         ], 200);
     }
 }

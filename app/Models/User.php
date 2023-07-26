@@ -26,12 +26,16 @@ class User extends Authenticatable
         'phone_number',
         'university',
         'photo',
+        'privilege',
     ];
     public function Business(){
         return $this->hasMany(Business::class);
     }
     public function Pateints(){
         return $this->hasMany(Pateints::class);
+    }
+    public function Events(){
+        return $this->hasMany(Event::class);
     }
     /**
      * The attributes that should be hidden for serialization.

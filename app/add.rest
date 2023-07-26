@@ -1,0 +1,40 @@
+GET http://127.0.0.1:8000/api/pateints
+Content-Type: application/json
+
+{
+    
+}
+###
+POST  http://127.0.0.1:8000/api/pateints
+Content-Type:  application/json
+
+{
+    "full_name":"قلع صنف ثاني",
+    "age":21,
+    "phone_number":"usgkjdb",
+    "user_id":1
+}
+###
+GET http://127.0.0.1:8000/api/pateints/2
+Content-Type: application/json
+
+{
+    
+}
+###
+POST  http://127.0.0.1:8000/api/pateints/2
+Content-Type:  application/json
+
+{
+    "full_name":"erhrtgbfd",
+    "age":21,
+    "phone_number":"usgkjdb",
+    "user_id":1
+}
+###
+DELETE  http://127.0.0.1:8000/api/pateints/2
+Content-Type: application/json
+
+{
+    
+}
