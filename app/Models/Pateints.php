@@ -13,11 +13,14 @@ class Pateints extends Model
         'age',
         'phone_number',
         'user_id',
-        'illness_id',
+        'illnesse_id',
     ];
 
     public function User(){
         return $this->belongsTo(User::class);
+    }
+    public function Illnesse(){
+        return $this->belongsTo(Illnesse::class);
     }
     public function States(){
         return $this->hasMany(state::class);

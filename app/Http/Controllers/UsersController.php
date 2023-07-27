@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -25,9 +27,31 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function login(Request $request)
     {
-        //
+        $username = $request->username;
+        $password = $request->password;
+
+        $user = User::where('name', $username)->first();
+
+        if (!$user) {
+            return response()->json(['message' => 'اسم المستخدم غير موجود'], 404);
+        }
+
+        if (!Hash::check($password, $user->password)) {
+            return response()->json(['message' => 'كلمة المرور غير صحيحة'], 401);
+        }
+
+        Auth::login($user);
+
+
+        return response()->json(['message' => 'تم تسجيل الدخول بنجاح']);
+    }
+    public function logout()
+    {
+        Auth::logout();
+
+        return response()->json(['message' => 'تم تسجيل الخروج بنجاح']);
     }
 
     /**
@@ -42,13 +66,13 @@ class UsersController extends Controller
             User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => $request->password,
+                'password' => Hash::make($request->password),
                 'age' => $request->age,
                 'gender' => $request->gender,
                 'phone_number' => $request->phone_number,
                 'university' => $request->university,
                 'photo' => $request->photo,
-                'privilege'=>$request->privilege,
+                'privilege' => $request->privilege,
             ]);
 
             return response()->json([

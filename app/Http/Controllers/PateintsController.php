@@ -13,21 +13,38 @@ class PateintsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $pateints = Pateints::all();
-        return response()->json([
-            'users' => $pateints,
-        ], 200);
-    }
+{
+    $patients = Pateints::with('user','illnesse')->get();
+    return response()->json([
+        'patients' => $patients,
+    ], 200);
+}
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        try {
+            Pateints::create([
+                'full_name' => $request->full_name,
+                'age' => $request->age,
+                'phone_number' => $request->phone_number,
+                'user_id' => auth()->user()->id,
+                'illnesse_id' => $request->illnesse_id,
+            ]);
+
+            return response()->json([
+                'messages' => "pateints successfully created."
+            ], 200);
+            // return $request;
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => "something went really wrong!"
+            ], 500);
+        }
     }
 
     /**
@@ -43,7 +60,8 @@ class PateintsController extends Controller
                 'full_name' => $request->full_name,
                 'age' => $request->age,
                 'phone_number' => $request->phone_number,
-                'user_id' => $request->user_id,
+                'user_id' => null,
+                'illnesse_id' => null,
             ]);
 
             return response()->json([
@@ -108,6 +126,7 @@ class PateintsController extends Controller
             $pateints->age = $request->age;
             $pateints->phone_number = $request->phone_number;
             $pateints->user_id = $request->user_id;
+            $pateints->illnesse_id = $request->illnesse_id;
             $pateints->save();
             return response()->json([
                 'message' => "pateints successfully updated."

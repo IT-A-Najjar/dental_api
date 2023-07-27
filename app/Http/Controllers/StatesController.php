@@ -14,7 +14,7 @@ class StatesController extends Controller
      */
     public function index()
     {
-        $states = state::all();
+        $states = state::with('illnesse','pateint')->get();
         return response()->json([
             'states' => $states,
         ], 200);

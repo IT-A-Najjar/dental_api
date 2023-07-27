@@ -14,7 +14,7 @@ class EventsController extends Controller
      */
     public function index()
     {
-        $Events = Event::all();
+        $Events = Event::with('user')->get();
         return response()->json([
             'Events' => $Events,
         ], 200);

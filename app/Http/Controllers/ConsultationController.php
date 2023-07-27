@@ -12,12 +12,13 @@ class ConsultationController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $consultation = Consultation::all();
-        return response()->json([
-            'consultation' => $consultation,
-        ], 200);
-    }
+{
+    $consultations = Consultation::with('comments')->get();
+
+    return response()->json([
+        'consultations' => $consultations,
+    ], 200);
+}
 
     /**
      * Show the form for creating a new resource.

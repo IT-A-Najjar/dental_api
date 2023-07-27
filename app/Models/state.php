@@ -9,7 +9,7 @@ class state extends Model
 {
     use HasFactory;
     protected $fillable=[
-        'state_name','description','time','place','pateint_id','illness_id'
+        'state_name','description','time','place','pateint_id','illnesse_id'
     ];
 
     public function Illnesse() {

@@ -1,18 +1,38 @@
-GET http://127.0.0.1:8000/api/pateints
+POST  http://127.0.0.1:8000/api/pateints
+Content-Type:  application/json
+
+{
+    "full_name":"khatab",
+    "email":"khatab@gmail.com",
+    "password":"20012001",
+    "age":21,
+    "gender":"man",
+    "phone_number":"usgkjdb",
+    "university":"uygjh",
+    "illnesse_id":1,
+    "user_id":1
+}
+###
+GET http://127.0.0.1:8000/api/state
 Content-Type: application/json
 
 {
     
 }
 ###
-POST  http://127.0.0.1:8000/api/pateints
+POST  http://127.0.0.1:8000/api/users
 Content-Type:  application/json
 
 {
-    "full_name":"قلع صنف ثاني",
+    "name":"khatab",
+    "email":"khatab@gmail.com",
+    "password":"20012001",
     "age":21,
+    "gender":"man",
     "phone_number":"usgkjdb",
-    "user_id":1
+    "university":"uygjh",
+    "photo":"liugli",
+    "privilege":1
 }
 ###
 GET http://127.0.0.1:8000/api/pateints/2

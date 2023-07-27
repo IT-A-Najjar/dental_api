@@ -15,5 +15,8 @@ class Illnesse extends Model
     public function States(){
         return $this->hasMany(state::class);
     }
+    public function Pateints(){
+        return $this->hasMany(Pateints::class);
+    }
     
 }

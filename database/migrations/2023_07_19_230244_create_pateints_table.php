@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('full_name');
             $table->integer('age');
             $table->string('phone_number');
+            $table->foreignId('illnesse_id')->nullable()->constrained('illnesses')->cascadeOnDelete();
             $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete();
             $table->timestamps();
         });

@@ -10,6 +10,7 @@ use App\Http\Controllers\EventsController;
 use App\Http\Controllers\UsersController;
 use App\Models\Business;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('login',[UsersController::class,'login']);
+Route::get('logout',[UsersController::class,'logout']);
 //Illnesses
 Route::get('illnesses',[IllnessesController::class,'index']);
 Route::get('illnesses/{id}',[IllnessesController::class,'show']);

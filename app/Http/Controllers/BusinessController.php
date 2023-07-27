@@ -14,7 +14,7 @@ class BusinessController extends Controller
      */
     public function index()
     {
-        $business = Business::all();
+        $business = Business::with('user')->get();
         return response()->json([
             'business' => $business,
         ], 200);
